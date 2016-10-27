@@ -15,7 +15,7 @@ def hashFamily():
     for _ in range(R * B):
         a = randint(1, PRIME - 1)
         b = randint(0, PRIME - 1)
-        yield lambda x: (a * x + b % PRIME) % SHINGLE_SPACE
+        yield lambda x: ((a * x + b) % PRIME) % SHINGLE_SPACE
 
 def mapper(key, value):
     # key: None
@@ -40,6 +40,4 @@ def reducer(key, values):
         shingle2 = set(shingle2)
         sim = float(len(shingle1.intersection(shingle2))) / len(shingle1.union(shingle2))
         if sim >= THR:
-            r = [key1, key2]
-            r.sort()
-            yield (r[0],r[1])
+            yield (min(key1, key2), max(key1, key2))
