@@ -27,7 +27,7 @@ def mapper(key, value):
     minhash = [min(map(hash, values)) for hash in hashFamily()]
 
     for index in range(0, R * B, R):
-        yield (str(minhash[index: index + R]), (key, values))
+        yield (str(index / R) + str(minhash[index: index + R]), (key, values))
 
 
 
